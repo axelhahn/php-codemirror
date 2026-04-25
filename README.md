@@ -33,9 +33,9 @@ Clone the project
 ```shell
 # FIXME 
 
-git clone https://github.com/axelhahn/<project>.git
+git clone https://github.com/axelhahn/php-codemirror.git
 
-cd <project>
+cd php-codemirror
 
 # Run the server
 php -S localhost:9000
