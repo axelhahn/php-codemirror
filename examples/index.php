@@ -17,9 +17,23 @@ showPage(
             Welcome to the CodeMirror Demos.
         </p>
 
-        <ul>
-            <li><a href=\"demo1.php\">Demo 1</a> - Shows 2 Codemirror instances with different themes and different syntax highlighters<br></li>
-            <li><a href=\"demo2.php\">Demo 2</a> - Show available themes and test it on htmlmixed mode example.<br></li>
-        </ul>
+        <h2>Demos</h2>
+
+        <h3>Multiple instances</h3>
+        <blockquote>
+        <p>
+            Display CodeMirror on your page.<br>
+            You can use multiple CodeMirror instances on your page. So you can mix different themes and syntax highlighters.<br>
+            <a class=\"btn\" href=\"multiple-instances.php\">Multiple instances</a>
+        </p>
+        </blockquote>
+
+        <h3>Available themes</h3>
+        <blockquote>
+        <p>
+            Codemirror has several themes you can select from.<br>
+            <a class=\"btn\" href=\"themes.php\">Try the themes</a>
+        </p>
+        </blockquote>
     "
 );

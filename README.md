@@ -35,13 +35,13 @@ Clone the project
 
 git clone https://github.com/axelhahn/php-codemirror.git
 
-cd php-codemirror
+cd php-codemirror/examples
 
 # Run the server
 php -S localhost:9000
 ```
 
-In the browser, open the url `http://localhost:9000/examples/demo.php`.
+In the browser, open the url `http://localhost:9000/`.
 
 ## First example for usage
 

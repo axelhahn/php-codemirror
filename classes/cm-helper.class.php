@@ -237,10 +237,11 @@ class cmhelper {
                     $this->_sHtmlHead.="<script src=\"$this->_sCmbaseUrl/mode/$sJsfile/$sJsfile.js\"></script>";
                 }
             } else {
-                throw new Exception( "Unknown type 'highlight-<strong>$sMode</strong>'.<br>"
-                    ."Known mode are: "
+                echo "⚠️ ". __CLASS__." - WARNING: Unknown type 'highlight-<strong>$sMode</strong>'<br>
+                    Known mode are: "
                     . implode(", ", array_keys($this->_aAvailableShModes))
-                );
+                    ."<br>"
+                    ;
             }
 
             if($sMode=='htmlmixed'){
@@ -269,12 +270,15 @@ class cmhelper {
      * @return void
      */
     protected function _addTheme(string $sTheme){
+
         if($sTheme){
             if(!in_array($sTheme, $this->_aAvailableThemes)){
-                throw new Exception("Unknown theme '$sTheme'<br>"
-                    . "Known themes are: "
-                    . implode(", ", array_keys($this->_aAvailableThemes))
-                    );
+                echo "⚠️ ". __CLASS__." - WARNING: Unknown theme '<strong>$sTheme</strong>'<br>
+                    Known themes are: "
+                    . implode(", ", array_values($this->_aAvailableThemes))
+                    ."<br>"
+                    ;
+                $sTheme=false;
             }
             if(!($this->_aThemes2Load[$sTheme]??false)){
                 $this->_aThemes2Load[$sTheme]=true;

@@ -48,26 +48,16 @@ function showCode(&$codemirror, string $sCode, string $sVal): string
             <td>$sOutput</td>
         </tr>
     </table>";
-
-    /*
-    try {
-        eval('$sReturn .= "more" ;');
-        eval('$sReturn .= '.$sCode.' ;');
-        // eval('$sReturn = '.$sCode.' ;');
-    } catch (Exception $e) {
-        echo $e->getMessage();
-    }
-    */
-    return $sReturn;
 }
 
 function showPage(string $sHeader, string $sBody): void 
 {
     if(strstr($_SERVER['REQUEST_URI'], 'index.php')) {
-        $nav="Welcome!";
+        $nav="";
     } else {
-        $nav="<a href='index.php'>&raquo; back</a>";
+        $nav="<a class=\"btn\" href=\"index.php\">&laquo; back</a>";
     }
+    $toHome="<a class=\"btn\" href=\"index.php\">&laquo; back</a><br>";
     echo <<<HTML
 <!DOCTYPE html>
 <html>
@@ -80,16 +70,15 @@ function showPage(string $sHeader, string $sBody): void
 
     </head>
     <body>
-        {$nav}
-        <hr>
-        {$sBody}
+        <main>
+            {$sBody}
+        </main>
 
-        <br>
-        <br>
-        <hr>
-        👤 Author: Axel Hahn<br>
-        📄 Source: <a href="https://github.com/axelhahn/php-codemirror">https://github.com/axelhahn/php-codemirror</a><br>
-        📜 License: GNU GPL 3.0<br>
+        <footer>
+            👤 Author: Axel Hahn<br>
+            📄 Source: <a href="https://github.com/axelhahn/php-codemirror">https://github.com/axelhahn/php-codemirror</a><br>
+            📜 License: GNU GPL 3.0<br>
+        </footer>
 
     </body>
 </html>

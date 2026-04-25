@@ -21,18 +21,9 @@ include "inc_functions.php";
 $aDemos=[
     // ------------------------------------------------------------
     [
-        'language' => 'php',
-        'info' => 'Highlighter for PHP',
-        'theme' => 'mdn-like',
-        'content' => '<?php 
-echo "Hello World"; 
-?>',
-    ],
-    // ------------------------------------------------------------
-    [
         'language' => 'htmlmixed',
         'info' => 'Mixed highlighter for HTML, CSS and JS',
-        'theme' => 'ayu-mirage',
+        // 'theme' => 'ayu-mirage',
         'content' => '<!DOCTYPE html>
 <html>
     <head>
@@ -62,33 +53,51 @@ echo "Hello World";
 // generate content
 // ----------------------------------------------------------------------
 
+$sThemeoptions='';
+$sThemeoptions.="<option value=\"\">default</option>";
+foreach($codemirror->getThemes() as $sTheme){
+    $sThemeoptions.="<option value=\"$sTheme\" ".($_GET['theme']==$sTheme?'selected="selected"':'').">$sTheme</option>";
+}
+
 foreach($aDemos as $aDemo){
 
-    $sIdTextarea='textarea-'.$aDemo['language'];
+    $sIdTextarea='id-'.uniqid();
 
     $htmlbody.='
-        <h2>'.$aDemo['language'].'</h2>
-        <p>
-            '.$aDemo['info'].'<br>
-            Theme: '.$aDemo['theme'].'
-        </p>'
+        <h2>Themes with an example of "'.$aDemo['language'].'"</h2>
+        <p>'
+            .$aDemo['info'].'<br>
+            The selected theme is <strong>'.($_GET['theme']??'').'</strong><br>
+        </p>
+
+        <form method="GET" action="?">
+            Select a theme:<br>
+            <select name="theme" onchange="this.form.submit();" size="10">
+                '.$sThemeoptions.'
+            </select>
+        </form>
+        <br>
+
+        <div>
+        '
         . showCode(
             $codemirror, 
-            // "<?php \n"
             "\$codemirror->addTextarea(\n"
             ."  [\n"
             ."    'id' => '$sIdTextarea',\n"
-            ."    'class' => 'highlight-$aDemo[language]', // <<< set a class 'highlight-<language>' here\n"
+            ."    'class' => 'highlight-$aDemo[language]',\n"
+            // ."    'value' => '$aDemo[content]'\n"
             ."    'value' => '$aDemo[content]',\n"
-            // ."    'value' => '<your-code-snippet-here>'\n"
             ."  ],\n"
             ."  [\n"
-            ."    'theme' => ".(($aDemo['theme']??null) ? "'$aDemo[theme]'" : "null") .",\n"
+            ."    'theme' => ".(($_GET['theme']??null) ? "'$_GET[theme]'" : "null") .", // <<< set your theme here\n"
             ."    'readonly' => true,\n"
             ."  ],\n"
             .");\n",
             $aDemo['content']
         )
+
+        .'</div>'
         ;
 }
 
@@ -97,11 +106,12 @@ foreach($aDemos as $aDemo){
 // ----------------------------------------------------------------------
 
 showPage(
-    "<title>CodeMirror - demo</title>"
+    "<title>CodeMirror - demo - themes</title>"
         .$codemirror->getHtmlHead()
     , 
     "
-        <h1>Php CodeMirror class :: Demo 1</h1>
+        <h1>Demo :: Themes</h1>
+        <a class=\"btn\" href=\"index.php\">&laquo; back</a><br>
         <p>
             This demo embeds multiple textareas with different languages.<br>
             By adding Codemirror to the page, the content of the textarea is highlighted.<br>
