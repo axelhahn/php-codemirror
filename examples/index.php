@@ -14,17 +14,21 @@ showPage(
         <h1>Php CodeMirror class</h1>
         
         <p>
-            Welcome to the CodeMirror Demos.
+            Welcome to the CodeMirror Demos.<br>
+            Axel wrote this class to show and edit code snippets with syntax highlighting.<br>
         </p>
 
         <h2>Demos</h2>
 
-        <h3>Multiple instances</h3>
+        <h3>Let's dive in</h3>
         <blockquote>
         <p>
-            Display CodeMirror on your page.<br>
-            You can use multiple CodeMirror instances on your page. So you can mix different themes and syntax highlighters.<br>
-            <a class=\"btn\" href=\"multiple-instances.php\">Multiple instances</a>
+            Let's get a first impression.<br>
+            We want to display a code snippet on our web page - and use syntax highlighting.<br>
+            Yep, no problem.<br>
+            <br>
+            And we want to use multiple instances on your page. You can mix different themes and syntax highlighters as well.<br>
+            <a class=\"btn\" href=\"multiple-instances.php\">Show me</a>
         </p>
         </blockquote>
 
