@@ -1,0 +1,24 @@
+html{
+    margin: 0;
+    padding: 0;
+    background: #fff;
+    background: linear-gradient(-10deg, #ece, #dde, #fca) fixed;
+    font-family: sans-serif;
+}
+body {
+    max-width: 1024px;
+    margin: 1em auto 4em;
+    padding: 1em;
+    background: #fff6;
+    border: 8px solid #fff3;
+    border-radius: 1em;
+}
+
+a {color: #22c}
+a:hover {color: #88e}
+h1{color: #858; margin: 0;}
+h2{color: #ee33a5; margin: 0; margin-top: 1.5em;}
+hr{border: none; border-bottom: 2px dotted #fffa;}
+table{width: 100%;}
+th{background: #0001; text-align: left;}
+td{width: 50%;}
