@@ -88,7 +88,7 @@ function showPage(string $sHeader, string $sBody): void
         <br>
         <hr>
         👤 Author: Axel Hahn<br>
-        📄 Source: <a href=\"https://github.com/axelhahn/php-codemirror\">https://github.com/axelhahn/php-codemirror</a><br>
+        📄 Source: <a href="https://github.com/axelhahn/php-codemirror">https://github.com/axelhahn/php-codemirror</a><br>
         📜 License: GNU GPL 3.0<br>
 
     </body>
