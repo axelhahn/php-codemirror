@@ -31,14 +31,14 @@ function showCode(&$codemirror, string $sCode, string $sVal): string
             ],
             [
                 'theme' => null,
-                'readonly' => true,
+                'readOnly' => true,
             ]
         )
         ;
     $sSourcecode=str_replace($sVal, "<code-snippet-here>", $sSourcecode);
     $sOutput = getOutput($codemirror, $sCode);
 
-    return "<table>
+    return "<table class=\"snippet\">
         <tr>
             <th>Sourcecode</th>
             <th>Output</th>

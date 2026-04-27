@@ -103,7 +103,22 @@ class cmhelper {
             <script src="'.$this->_sCmbaseUrl.'/addon/lint/lint.css"></script>
             -->
         ';
-        $this->_sJS.='';
+
+         // https://stackoverflow.com/questions/1462138/event-listener-for-when-element-becomes-visible
+        $this->_sJS.='
+        <script>
+        function onVisible(element, callback) {
+            new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                if(entry.intersectionRatio > 0) {
+                    callback(element);
+                    observer.disconnect();
+                }
+                });
+            }).observe(element);
+            if(!callback) return new Promise(r => callback=r);
+        }
+        </script>';
     }
 
     // ----------------------------------------------------------------------
@@ -123,8 +138,14 @@ class cmhelper {
      * @param string $sMode         Mode/ language for syntax highlighting
      * @param string $sFormid       id of the textarea
      * @param array  $aMoreOptions  array of additional options. known subkeys are
-     *                              - readonly  bool    if true the editor is readonly
-     *                              - theme     string  thene name
+     *                              - readOnly        bool    if true the editor is readonly
+     *                              - theme           string  thene name
+     * 
+     *                              - indentUnit      int     indent unit; default: 4
+     *                              - tabSize         int     tab size; default: 4
+     *                              - lineNumbers     bool    show line numbers; default: false
+     *                              - lineWrapping    bool    wrap long lines; default: false
+     *                              - matchBrackets   bool    highlight matching brackets; default: true
      * @return bool
      */
     public function addEditor(string $sMode, string $sFormid='', array $aMoreOptions=[]):bool{
@@ -144,28 +165,30 @@ class cmhelper {
 
         $iCmCounter++;
 
+        if (isset($aMoreOptions['readonly'])){
+            echo "⚠️ ". __METHOD__." - WARNING: Rewrite option with camelcase '<strong>readOnly</strong>' (instead of 'readonly')<br>";
+
+        }
         // see https://codemirror.net/3/doc/manual.html for options
         $this->_sJS.='
             <script>
-                window.setTimeout(function() {
-                    CodeMorrorEditor'.$iCmCounter.' = CodeMirror.fromTextArea(
+                onVisible(document.querySelector("#'.$sFormid.'"), 
+                    () => CodeMorrorEditor'.$iCmCounter.' = CodeMirror.fromTextArea(
                         document.getElementById("'.$sFormid.'"), {
                             mode: "'.($this->_aAvailableShModes[$sMode]['mode'] ?? $sMode).'",
                             '.($sTheme ? "theme: \"$sTheme\"," : '').'
-                            indentUnit: 2,
-                            tabSize: 4,
+
+                            indentUnit: '.($aMoreOptions['indentUnit']??4).',
+                            tabSize: '.($aMoreOptions['tabSize']??4).',
                             indentWithTabs: true,
-                            lineNumbers: true,
-                            lineWrapping: false,
-                            matchBrackets: true,
-                            selectionPointer: true,
-                            styleActiveLine: true,
-                            '.($aMoreOptions['readonly']??false ? 'readOnly: true,' : '').'
-                    });
-                }, 30);
+                            lineNumbers: '.($aMoreOptions['lineNumbers']??true ? 'true' : 'false').',
+                            lineWrapping: '.($aMoreOptions['lineWrapping']??false ? 'true' : 'false').',
+                            matchBrackets: '.($aMoreOptions['matchBrackets']??true ? 'true' : 'false').',
+                            '.($aMoreOptions['readOnly']??true ? 'readOnly: true,' : '').'
+                    })
+                );
             </script>            
         ';
-
 
         return true;
     }
@@ -188,8 +211,14 @@ class cmhelper {
      *                              - value    string  initial value inside teaxtarea
      *                              - ... all other textarea attributes
      * @param array  $aMoreOptions  array of additional options. Known subkeys are
-     *                              - readonly  bool    if true the editor is readonly
-     *                              - theme     string  thene name
+     *                              - readOnly        bool    if true the editor is readonly
+     *                              - theme           string  thene name
+     * 
+     *                              - indentUnit      int     indent unit; default: 4
+     *                              - tabSize         int     tab size; default: 4
+     *                              - lineNumbers     bool    show line numbers; default: false
+     *                              - lineWrapping    bool    wrap long lines; default: false
+     *                              - matchBrackets   bool    highlight matching brackets; default: true
      * @return string html code for textarea
      */
     public function addTextarea(array $aTextarea=[], array $aMoreOptions=[]):string{
@@ -242,8 +271,10 @@ class cmhelper {
                     . implode(", ", array_keys($this->_aAvailableShModes))
                     ."<br>"
                     ;
+                $sMode="text";
             }
 
+            # TODO: put it into a config
             if($sMode=='htmlmixed'){
                 $this->_sJS.='
                         <script>
@@ -296,8 +327,11 @@ class cmhelper {
      * Get a list of supported syntax highlight modes
      * @return array
      */
-    public function getModes(){
-        return array_keys($this->_aAvailableShModes);
+    public function getModes($bWithOptions=false){
+        return $bWithOptions 
+            ? $this->_aAvailableShModes 
+            : array_keys($this->_aAvailableShModes)
+        ;
     }
 
     /**
@@ -326,11 +360,4 @@ class cmhelper {
         return $this->_sJS;
     }
 
-    /**
-     * Get a list of supported languages
-     * @return array
-     */
-    public function getLanguages(){
-        return array_keys($this->_aAvailableShModes);
-    }
 }

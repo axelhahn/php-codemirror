@@ -73,7 +73,7 @@ You can repeat it multiple times for several textarea with different options.
   - value {string} - content of the textarea (= your source code to highlight)
   - ... all other textarea attributes
 - array with options for codemirror
-  - readonly {bool}
+  - readOnly {bool}
   - theme {string}
 
 Example:
@@ -85,7 +85,7 @@ $codemirror->addTextarea(
         'value' => '<your sourcecode to highlight>',
     ],
     [
-        'readonly' => true,
+        'readOnly' => true,
         // 'theme' => '...',
     ]
 );
@@ -105,7 +105,7 @@ $htmlbody='
             ],
             [
                 'theme' => $aDemo['theme']??null,
-                'readonly' => true,
+                'readOnly' => true,
             ]
         );
 $sCmHead=$codemirror->getHtmlHead();

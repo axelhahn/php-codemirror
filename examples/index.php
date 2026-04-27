@@ -39,5 +39,13 @@ showPage(
             <a class=\"btn\" href=\"themes.php\">Try the themes</a>
         </p>
         </blockquote>
+
+        <h3>Available modes</h3>
+        <blockquote>
+        <p>
+            A few syntax highlight modes were added<br>
+            <a class=\"btn\" href=\"modes.php\">See the modes</a>
+        </p>
+        </blockquote>
     "
 );

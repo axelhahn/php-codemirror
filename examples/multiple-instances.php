@@ -21,18 +21,18 @@ include "inc_functions.php";
 $aDemos=[
     // ------------------------------------------------------------
     [
-        'language' => 'php',
+        'mode' => 'php',
         'info' => 'Highlighter for PHP',
-        'theme' => 'eclipse',
+        'theme' => 'rubyblue',
         'content' => '<?php 
 echo "Hello World"; 
 ?>',
     ],
     // ------------------------------------------------------------
     [
-        'language' => 'htmlmixed',
+        'mode' => 'htmlmixed',
         'info' => 'Mixed highlighter for HTML, CSS and JS',
-        'theme' => 'ttcn',
+        'theme' => 'abcdef',
         'content' => '<!DOCTYPE html>
 <html>
     <head>
@@ -67,10 +67,10 @@ foreach($aDemos as $aDemo){
     $sIdTextarea='id-'.uniqid();
 
     $htmlbody.='
-        <h2>'.$aDemo['language'].'</h2>
+        <h2>'.$aDemo['mode'].'</h2>
         <p>
             '.$aDemo['info'].'<br>
-            Theme: '.$aDemo['theme'].'
+            Theme: <strong>'.$aDemo['theme'].'</strong><br>
         </p>'
         . showCode(
             $codemirror, 
@@ -78,13 +78,13 @@ foreach($aDemos as $aDemo){
             "\$codemirror->addTextarea(\n"
             ."  [\n"
             ."    'id' => '$sIdTextarea',\n"
-            ."    'class' => 'highlight-$aDemo[language]', // <<< set a class 'highlight-<language>' here\n"
+            ."    'class' => 'highlight-$aDemo[mode]', // <<< set a class 'highlight-<mode>' here\n"
             ."    'value' => '$aDemo[content]',\n"
             // ."    'value' => '<your-code-snippet-here>'\n"
             ."  ],\n"
             ."  [\n"
             ."    'theme' => ".(($aDemo['theme']??null) ? "'$aDemo[theme]'" : "null") .",\n"
-            ."    'readonly' => true,\n"
+            ."    'readOnly' => true,\n"
             ."  ],\n"
             .");\n",
             $aDemo['content']

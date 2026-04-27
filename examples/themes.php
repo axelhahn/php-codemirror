@@ -56,7 +56,7 @@ $aDemos=[
 $sThemeoptions='';
 $sThemeoptions.="<option value=\"\">default</option>";
 foreach($codemirror->getThemes() as $sTheme){
-    $sThemeoptions.="<option value=\"$sTheme\" ".($_GET['theme']==$sTheme?'selected="selected"':'').">$sTheme</option>";
+    $sThemeoptions.="<option value=\"$sTheme\" ".(($_GET['theme']??'')==$sTheme?'selected="selected"':'').">$sTheme</option>";
 }
 
 foreach($aDemos as $aDemo){
@@ -91,7 +91,7 @@ foreach($aDemos as $aDemo){
             ."  ],\n"
             ."  [\n"
             ."    'theme' => ".(($_GET['theme']??null) ? "'$_GET[theme]'" : "null") .", // <<< set your theme here\n"
-            ."    'readonly' => true,\n"
+            ."    'readOnly' => true,\n"
             ."  ],\n"
             .");\n",
             $aDemo['content']
@@ -106,7 +106,7 @@ foreach($aDemos as $aDemo){
 // ----------------------------------------------------------------------
 
 showPage(
-    "<title>CodeMirror - demo - themes</title>"
+    "<title>CodeMirror - demo - Themes</title>"
         .$codemirror->getHtmlHead()
     , 
     "
@@ -118,5 +118,6 @@ showPage(
         </p>
 
         $htmlbody
+        
         ".$codemirror->getJs()
 );

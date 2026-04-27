@@ -1,0 +1,11 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "provider": {
+    "ollama": {
+      "api_url": "http://localhost:11434/v1"
+    }
+  },
+  "model": {
+    "granite-code": "ollama/granite-code:3b"
+  }
+}
