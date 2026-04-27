@@ -56,11 +56,11 @@ The options define the behavior of the editor. Currently only the following opti
 | ---             | ---    | --- 
 | `readOnly`      | bool   | if true the editor is readonly 
 | `theme`         | string | name of the theme 
-| `indentUnit`    | int  | indent unit; default: 4
-| `tabSize`       | int  | tab size; default: 4
-| `lineNumbers`   | bool | show line numbers; default: false
-| `lineWrapping`  | bool | wrap long lines; default: false
-| `matchBrackets` | bool | highlight matching brackets; default: true
+| `indentUnit`    | int    | indent unit; default: 4
+| `tabSize`       | int    | tab size; default: 4
+| `lineNumbers`   | bool   | show line numbers; default: false
+| `lineWrapping`  | bool   | wrap long lines; default: false
+| `matchBrackets` | bool   | highlight matching brackets; default: true
 
 ### Apply codemirror - addEditor()
 
