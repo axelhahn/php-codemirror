@@ -184,7 +184,7 @@ class cmhelper {
                             lineNumbers: '.($aMoreOptions['lineNumbers']??true ? 'true' : 'false').',
                             lineWrapping: '.($aMoreOptions['lineWrapping']??false ? 'true' : 'false').',
                             matchBrackets: '.($aMoreOptions['matchBrackets']??true ? 'true' : 'false').',
-                            '.($aMoreOptions['readOnly']??true ? 'readOnly: true,' : '').'
+                            '.($aMoreOptions['readOnly']??false ? 'readOnly: true,' : '').'
                     })
                 );
             </script>            
