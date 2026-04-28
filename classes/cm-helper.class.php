@@ -259,36 +259,35 @@ class cmhelper {
      * @return void
      */
     protected function _addMode(string $sMode){
-        if(!($this->_aModes2Load[$sMode]??false)){
-            $this->_aModes2Load[$sMode]=true;
-            if($this->_aAvailableShModes[$sMode]??false){
-                foreach($this->_aAvailableShModes[$sMode]['load'] as $sJsfile){
-                    $this->_sHtmlHead.="<script src=\"$this->_sCmbaseUrl/mode/$sJsfile/$sJsfile.js\"></script>";
+        if($this->_aAvailableShModes[$sMode]??false){
+            foreach($this->_aAvailableShModes[$sMode]['load'] as $sJsfile){
+                if(!($this->_aModes2Load[$sJsfile]??false)){
+                    $this->_aModes2Load[$sJsfile]=true;
+                    $this->_sHtmlHead.="<script src=\"$this->_sCmbaseUrl/mode/$sJsfile/$sJsfile.js\"></script>";                        
                 }
-            } else {
-                echo "⚠️ ". __CLASS__." - WARNING: Unknown type 'highlight-<strong>$sMode</strong>'<br>
-                    Known mode are: "
-                    . implode(", ", array_keys($this->_aAvailableShModes))
-                    ."<br>"
-                    ;
-                $sMode="text";
             }
+        } else {
+            echo "⚠️ ". __CLASS__." - WARNING: Unknown type 'highlight-<strong>$sMode</strong>'<br>
+                Known mode are: "
+                . implode(", ", array_keys($this->_aAvailableShModes))
+                ."<br>"
+                ;
+            $sMode="text";
+        }
 
-            # TODO: put it into a config
-            if($sMode=='htmlmixed'){
-                $this->_sJS.='
-                        <script>
-                            var mixedMode = {
-                                name: "htmlmixed",
-                                scriptTypes: [{matches: /\/x-handlebars-template|\/x-mustache/i,
-                                            mode: null},
-                                            {matches: /(text|application)\/(x-)?vb(a|script)/i,
-                                            mode: "vbscript"}]
-                            };
-                        </script>                
-                ';
-
-            }
+        # TODO: put it into a config
+        if($sMode=='htmlmixed'){
+            $this->_sJS.='
+                <script>
+                    var mixedMode = {
+                        name: "htmlmixed",
+                        scriptTypes: [{matches: /\/x-handlebars-template|\/x-mustache/i,
+                                    mode: null},
+                                    {matches: /(text|application)\/(x-)?vb(a|script)/i,
+                                    mode: "vbscript"}]
+                    };
+                </script>                
+            ';
         }
     }
 
