@@ -53,10 +53,12 @@ $aDemos=[
 // generate content
 // ----------------------------------------------------------------------
 
+$sThemeParam=preg_replace('/[^a-zA-Z0-9\-]/', '', $_GET['theme']??'');
+
 $sThemeoptions='';
 $sThemeoptions.="<option value=\"\">default</option>";
 foreach($codemirror->getThemes() as $sTheme){
-    $sThemeoptions.="<option value=\"$sTheme\" ".(($_GET['theme']??'')==$sTheme?'selected="selected"':'').">$sTheme</option>";
+    $sThemeoptions.="<option value=\"$sTheme\" ".(($sThemeParam??'')==$sTheme?'selected="selected"':'').">$sTheme</option>";
 }
 
 foreach($aDemos as $aDemo){
@@ -67,7 +69,7 @@ foreach($aDemos as $aDemo){
         <h2>Themes with an example of "'.$aDemo['language'].'"</h2>
         <p>'
             .$aDemo['info'].'<br>
-            The selected theme is <strong>'.($_GET['theme']??'').'</strong><br>
+            The selected theme is <strong>'.$sThemeParam.'</strong><br>
         </p>
 
         <form method="GET" action="?">
@@ -90,7 +92,7 @@ foreach($aDemos as $aDemo){
             ."    'value' => '$aDemo[content]',\n"
             ."  ],\n"
             ."  [\n"
-            ."    'theme' => ".(($_GET['theme']??null) ? "'$_GET[theme]'" : "null") .", // <<< set your theme here\n"
+            ."    'theme' => ".($sThemeParam ? "'$sThemeParam'" : "null") .", // <<< set your theme here\n"
             ."    'readOnly' => true,\n"
             ."  ],\n"
             .");\n",
