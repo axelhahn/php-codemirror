@@ -6,7 +6,7 @@ Include the class file and create a new instance.
 
 ```php
 <?php
-require_once __DIR__.'/../classes/cm-helper.class.php';
+require_once '<webroot>/vendor/php-codemirror/classes/cm-helper.class.php';
 $codemirror=new cmhelper();
 ```
 
@@ -38,6 +38,7 @@ echo $codemirror->addTextarea(
 ```
 
 This method returns the html code for the textarea.
+Internally it stores newly added highlighters and themes and loads them when needed.
 
 #### Array for textarea
 
@@ -64,7 +65,7 @@ The options define the behavior of the editor. Currently only the following opti
 
 ### Apply codemirror - addEditor()
 
-This is an alternative method to `addTextarea()` that applies the codemirror editor to an already existing textarea.
+This is an alternative method to `addTextarea()` that applies the codemirror editor to an already existing / elsewhere rendered textarea.
 
 ```text
 $codemirror->addEditor(
@@ -80,6 +81,9 @@ $codemirror->addEditor(
 | #2    | string | id of the textarea
 | #3    | array  | The options are the same as for `addTextarea()`
 
+This method returns nothing.
+Internally it stores newly added highlighters and themes and loads them when needed.
+
 ### Render page
 
 The page is rendered by the class methods 
@@ -87,7 +91,54 @@ The page is rendered by the class methods
 * `getHtmlHead()` to load the vase code, themes, syntax highlighting and 
 * `getJs()` to initialize the editor
 
+!!! warning "WARNING"
+    You need to keep in mind to call these methods after you have added all your textareas. In deppendcy of set highlighters and themes they respond a list on needed libs to load.
+
+This is a complete example.
+
 ```php
-echo $codemirror->getHtmlHead();
-echo $codemirror->getJs();
+<?php
+declare(strict_types=1);
+
+require_once '[webroot]/vendor/php-codemirror/classes/cm-helper.class.php';
+$codemirror=new cmhelper();
+
+$htmlbody=$codemirror->addTextarea(
+            [
+                'class' => 'highlight-htmlmixed',
+                'value' => '<your sourcecode to highlight>',
+            ],
+            [
+                'readOnly' => true,
+            ]
+        );
+
+$sCmHead=$codemirror->getHtmlHead();
+$sCmJs=$codemirror->getJs();
+
+echo <<<HTML
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>CodeMirror - demo</title>"
+        {$sCmHead}
+
+    </head>
+    <body>
+
+        <h1>Demo</h1>
+
+        {$htmlbody}
+        {$sCmJs}
+
+    </body>
+</html>
+HTML;
 ```
+
+### Other methods
+
+TODO

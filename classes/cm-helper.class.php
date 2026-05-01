@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * ----------------------------------------------------------------------
  * 
@@ -11,9 +14,8 @@
  * ----------------------------------------------------------------------
  * 2025-11-16  v0.1  <axel>  initial version
  * 2026-04-17  v0.2  <axel>  allow multiple instances
+ * 2026-05-01  v0.3  <axel>  __lastModified__
  */
-
-declare(strict_types=1);
 
 class cmhelper {
 
@@ -93,7 +95,6 @@ class cmhelper {
         $this->_sHtmlHead.='
             <!-- codemirror -->
             <link rel="stylesheet" href="'.$this->_sCmbaseUrl.'/codemirror.min.css">
-            <link rel="stylesheet" href="'.$this->_sCmbaseUrl.'/theme/neo.min.css">
             <script src="'.$this->_sCmbaseUrl.'/codemirror.min.js"></script>
             <script src="'.$this->_sCmbaseUrl.'/addon/selection/selection-pointer.min.js"></script>
             <script src="'.$this->_sCmbaseUrl.'/addon/edit/matchbrackets.min.js"></script>
@@ -301,7 +302,7 @@ class cmhelper {
      */
     protected function _addTheme(string $sTheme){
 
-        if($sTheme){
+        if($sTheme && $sTheme!=="default"){
             if(!in_array($sTheme, $this->_aAvailableThemes)){
                 echo "⚠️ ". __CLASS__." - WARNING: Unknown theme '<strong>$sTheme</strong>'<br>
                     Known themes are: "
