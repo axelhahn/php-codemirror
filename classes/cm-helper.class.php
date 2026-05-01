@@ -8,7 +8,7 @@ declare(strict_types=1);
  * HELPER CLASS for syntax highlighting with codemiror
  * 
  * @author Axel Hahn
- * @link TODO
+ * @link https://github.com/axelhahn/php-codemirror
  * @license http://www.gnu.org/licenses/gpl-3.0.html GPL 3.0
  * 
  * ----------------------------------------------------------------------
@@ -71,7 +71,8 @@ class cmhelper {
     /**
      * __construct
      */
-    public function __construct(){
+    public function __construct()
+    {
         $aCfg=@include 'cm-helper.config.php';
         $this->_aAvailableShModes=@include 'cm-helper.lang.php';
         $this->_aAvailableThemes=@include 'cm-helper.themes.php';
@@ -90,7 +91,8 @@ class cmhelper {
      * @param string $sNewbase  new ur
      * @return void
      */
-    public function setBase(string $sNewbase=''): void{
+    public function setBase(string $sNewbase=''): void
+    {
         $this->_sCmbaseUrl=$sNewbase?:$this->_sCmbaseUrl;
         $this->_sHtmlHead.='
             <!-- codemirror -->
@@ -149,7 +151,8 @@ class cmhelper {
      *                              - matchBrackets   bool    highlight matching brackets; default: true
      * @return bool
      */
-    public function addEditor(string $sMode, string $sFormid='', array $aMoreOptions=[]):bool{
+    public function addEditor(string $sMode, string $sFormid='', array $aMoreOptions=[]):bool
+    {
 
         static $iCmCounter;
 
@@ -222,7 +225,8 @@ class cmhelper {
      *                              - matchBrackets   bool    highlight matching brackets; default: true
      * @return string html code for textarea
      */
-    public function addTextarea(array $aTextarea=[], array $aMoreOptions=[]):string{
+    public function addTextarea(array $aTextarea=[], array $aMoreOptions=[]):string
+    {
 
         static $iCmCounter;
 
@@ -259,7 +263,8 @@ class cmhelper {
      * @param string $sMode
      * @return void
      */
-    protected function _addMode(string $sMode){
+    protected function _addMode(string $sMode): void
+    {
         if($this->_aAvailableShModes[$sMode]??false){
             foreach($this->_aAvailableShModes[$sMode]['load'] as $sJsfile){
                 if(!($this->_aModes2Load[$sJsfile]??false)){
@@ -300,7 +305,8 @@ class cmhelper {
      * @param string $sTheme  name of the theme
      * @return void
      */
-    protected function _addTheme(string $sTheme){
+    protected function _addTheme(string $sTheme): void
+    {
 
         if($sTheme && $sTheme!=="default"){
             if(!in_array($sTheme, $this->_aAvailableThemes)){
@@ -327,7 +333,8 @@ class cmhelper {
      * Get a list of supported syntax highlight modes
      * @return array
      */
-    public function getModes($bWithOptions=false){
+    public function getModes($bWithOptions=false): array
+    {
         return $bWithOptions 
             ? $this->_aAvailableShModes 
             : array_keys($this->_aAvailableShModes)
@@ -338,7 +345,8 @@ class cmhelper {
      * Get a list of known themes
      * @return array
      */
-    public function getThemes(){
+    public function getThemes(): array
+    {
         return $this->_aAvailableThemes;
     }
 
@@ -348,7 +356,8 @@ class cmhelper {
      * Get html code for html head lines
      * @return string
      */
-    public function getHtmlHead(): string{
+    public function getHtmlHead(): string
+    {
         return $this->_sHtmlHead;
     }
 
@@ -356,7 +365,8 @@ class cmhelper {
      * Get html code for javascript code for bottom of html page
      * @return string
      */
-    public function getJs(): string{
+    public function getJs(): string
+    {
         return $this->_sJS;
     }
 

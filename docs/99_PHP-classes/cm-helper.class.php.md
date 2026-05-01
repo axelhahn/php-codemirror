@@ -12,7 +12,7 @@ generator: Axels php-classdoc; https://github.com/axelhahn/php-classdoc
  HELPER CLASS for syntax highlighting with codemiror
 
  @author Axel Hahn
- @link TODO
+ @link https://github.com/axelhahn/php-codemirror
  @license http://www.gnu.org/licenses/gpl-3.0.html GPL 3.0
 
  ----------------------------------------------------------------------
@@ -50,7 +50,7 @@ default value: {{defaultvalue}}
 
 __construct
 
-Line [74](https://github.com/axelhahn/php-codemirror/tree/main/classes/cm-helper.class.php#L74) (6 lines)
+Line [74](https://github.com/axelhahn/php-codemirror/tree/main/classes/cm-helper.class.php#L74) (7 lines)
 
 **Return**: `void`
 
@@ -62,7 +62,7 @@ Set a base url for codemirror resources.
  Its value cannot be verified - it is just used for html head
  Check the browser dev tools -> network if the resource can be loaded.
 
-Line [93](https://github.com/axelhahn/php-codemirror/tree/main/classes/cm-helper.class.php#L93) (31 lines)
+Line [94](https://github.com/axelhahn/php-codemirror/tree/main/classes/cm-helper.class.php#L94) (32 lines)
 
 **Return**: `void`
 
@@ -83,7 +83,7 @@ Add an editor with its own syntax highlighting for a textarea.
  - $o->getJs()
  ... to apply the editor settings in the html document
 
-Line [152](https://github.com/axelhahn/php-codemirror/tree/main/classes/cm-helper.class.php#L152) (44 lines)
+Line [154](https://github.com/axelhahn/php-codemirror/tree/main/classes/cm-helper.class.php#L154) (45 lines)
 
 **Return**: `bool`
 
@@ -114,7 +114,7 @@ Add an editor with its own syntax highlighting for a textarea.
  - $o->getJs()
  ... to apply the editor settings in the html document
 
-Line [225](https://github.com/axelhahn/php-codemirror/tree/main/classes/cm-helper.class.php#L225) (28 lines)
+Line [228](https://github.com/axelhahn/php-codemirror/tree/main/classes/cm-helper.class.php#L228) (29 lines)
 
 **Return**: `string`
 
@@ -143,9 +143,9 @@ Line [225](https://github.com/axelhahn/php-codemirror/tree/main/classes/cm-helpe
 
 Get a list of supported syntax highlight modes
 
-Line [330](https://github.com/axelhahn/php-codemirror/tree/main/classes/cm-helper.class.php#L330) (6 lines)
+Line [336](https://github.com/axelhahn/php-codemirror/tree/main/classes/cm-helper.class.php#L336) (7 lines)
 
-**Return**: `array *`
+**Return**: `array`
 
 **Parameters**: **1** (required: 0)
 
@@ -157,9 +157,9 @@ Line [330](https://github.com/axelhahn/php-codemirror/tree/main/classes/cm-helpe
 
 Get a list of known themes
 
-Line [341](https://github.com/axelhahn/php-codemirror/tree/main/classes/cm-helper.class.php#L341) (3 lines)
+Line [348](https://github.com/axelhahn/php-codemirror/tree/main/classes/cm-helper.class.php#L348) (4 lines)
 
-**Return**: `array *`
+**Return**: `array`
 
 **Parameters**: **0** (required: 0)
 
@@ -167,7 +167,7 @@ Line [341](https://github.com/axelhahn/php-codemirror/tree/main/classes/cm-helpe
 
 Get html code for html head lines
 
-Line [351](https://github.com/axelhahn/php-codemirror/tree/main/classes/cm-helper.class.php#L351) (3 lines)
+Line [359](https://github.com/axelhahn/php-codemirror/tree/main/classes/cm-helper.class.php#L359) (4 lines)
 
 **Return**: `string`
 
@@ -177,7 +177,7 @@ Line [351](https://github.com/axelhahn/php-codemirror/tree/main/classes/cm-helpe
 
 Get html code for javascript code for bottom of html page
 
-Line [359](https://github.com/axelhahn/php-codemirror/tree/main/classes/cm-helper.class.php#L359) (3 lines)
+Line [368](https://github.com/axelhahn/php-codemirror/tree/main/classes/cm-helper.class.php#L368) (4 lines)
 
 **Return**: `string`
 
