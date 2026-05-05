@@ -12,7 +12,7 @@ $codemirror=new cmhelper();
 
 ### Set a base url for codemirror resources
 
-This step is optional. If you have a local copy of codemirror you can set a base url. By default the resources are loaded from cdnjs.
+This step is optional. If you have a local copy of codemirror you can set a base url. By default the resources are loaded from CDNJS.
 
 You can set a relative or absolute url. The base url will be loaded in the html head.
 
@@ -45,9 +45,11 @@ Internally it stores newly added highlighters and themes and loads them when nee
 You can define any html attribute for the textarea tag.
 The specialties are:
 
-* `id` - this attribute is required
-* `class` - this attribute is required and must contain a css class `highlight-<mode>` to define the mode for syntax highlighting
-* `value` - content of the textarea. This key will be removed before writing the textarea tag.
+| key             | type   | description
+| ---             | ---    | --- 
+| `id`            | string | required: id for the textarea
+| `class`         | string | required: this attribute must contain a css class named `highlight-<mode>` to define the mode for syntax highlighting
+| `value`         | string | content of the textarea. This key will be removed before writing the textarea tag.
 
 #### Array for options
 
@@ -92,7 +94,7 @@ The page is rendered by the class methods
 * `getJs()` to initialize the editor
 
 !!! warning "WARNING"
-    You need to keep in mind to call these methods after you have added all your textareas. In deppendcy of set highlighters and themes they respond a list on needed libs to load.
+    You need to keep in mind to call these methods after you have added all your textareas. In dependency of set highlighters and themes they respond a list on needed libs to load.
 
 This is a complete example.
 
@@ -142,3 +144,11 @@ HTML;
 ### Other methods
 
 TODO
+
+#### Get available modes - getModes()
+
+This method returns available syntax highligter modes.
+
+#### Get available themes - getThemes()
+
+This method returns available themes to color the textarea.
