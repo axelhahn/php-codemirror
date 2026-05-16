@@ -14,7 +14,7 @@ declare(strict_types=1);
  * ----------------------------------------------------------------------
  * 2025-11-16  v0.1  <axel>  initial version
  * 2026-04-17  v0.2  <axel>  allow multiple instances
- * 2026-05-01  v0.3  <axel>  __lastModified__
+ * 2026-05-16  v0.3  <axel>  __lastModified__
  */
 
 class cmhelper {
@@ -73,10 +73,10 @@ class cmhelper {
      */
     public function __construct()
     {
-        $aCfg=@include 'cm-helper.config.php';
-        $this->_aAvailableShModes=@include 'cm-helper.lang.php';
-        $this->_aAvailableThemes=@include 'cm-helper.themes.php';
-        $this->setBase($aCfg['baseurl']??false);
+        $aCfg=(array) (include 'cm-helper.config.php' ?: []);
+        $this->_aAvailableShModes=(array) (include 'cm-helper.lang.php' ?: []);
+        $this->_aAvailableThemes=(array) (include 'cm-helper.themes.php' ?: []);
+        $this->setBase((string) ($aCfg['baseurl']??''));
     }
 
     // ----------------------------------------------------------------------
@@ -93,7 +93,7 @@ class cmhelper {
      */
     public function setBase(string $sNewbase=''): void
     {
-        $this->_sCmbaseUrl=$sNewbase?:$this->_sCmbaseUrl;
+        $this->_sCmbaseUrl=$sNewbase ?? $this->_sCmbaseUrl;
         $this->_sHtmlHead.='
             <!-- codemirror -->
             <link rel="stylesheet" href="'.$this->_sCmbaseUrl.'/codemirror.min.css">
@@ -157,33 +157,35 @@ class cmhelper {
         static $iCmCounter;
 
         if(!($iCmCounter??false)){
-            $iCmCounter=0;
+            $iCmCounter=(int) 0;
         }
+        $iCmCounter=(int) $iCmCounter;
         $iCmCounter++;
 
 
-        $sTheme=$aMoreOptions['theme']??'';
+        $sTheme=(string) ($aMoreOptions['theme']??'');
 
         $this->_addMode($sMode);
         $this->_addTheme($sTheme);
 
         $iCmCounter++;
 
-        if (isset($aMoreOptions['readonly'])){
+        if ($aMoreOptions['readonly']!==null){
             echo "⚠️ ". __METHOD__." - WARNING: Rewrite option with camelcase '<strong>readOnly</strong>' (instead of 'readonly')<br>";
 
         }
         // see https://codemirror.net/3/doc/manual.html for options
+        $sObjName='CodeMorrorEditor'.$iCmCounter;
         $this->_sJS.='
             <script>
                 onVisible(document.querySelector("#'.$sFormid.'"), 
-                    () => CodeMorrorEditor'.$iCmCounter.' = CodeMirror.fromTextArea(
+                    () => '.$sObjName.' = CodeMirror.fromTextArea(
                         document.getElementById("'.$sFormid.'"), {
-                            mode: "'.($this->_aAvailableShModes[$sMode]['mode'] ?? $sMode).'",
+                            mode: "'.(string) ($this->_aAvailableShModes[$sMode]['mode'] ?? $sMode).'",
                             '.($sTheme ? "theme: \"$sTheme\"," : '').'
 
-                            indentUnit: '.($aMoreOptions['indentUnit']??4).',
-                            tabSize: '.($aMoreOptions['tabSize']??4).',
+                            indentUnit: '.(int) ($aMoreOptions['indentUnit']??4).',
+                            tabSize: '.(int) ($aMoreOptions['tabSize']??4).',
                             indentWithTabs: true,
                             lineNumbers: '.($aMoreOptions['lineNumbers']??true ? 'true' : 'false').',
                             lineWrapping: '.($aMoreOptions['lineWrapping']??false ? 'true' : 'false').',
@@ -223,6 +225,7 @@ class cmhelper {
      *                              - lineNumbers     bool    show line numbers; default: false
      *                              - lineWrapping    bool    wrap long lines; default: false
      *                              - matchBrackets   bool    highlight matching brackets; default: true
+     *                              - height          string  TODO css value for height
      * @return string html code for textarea
      */
     public function addTextarea(array $aTextarea=[], array $aMoreOptions=[]):string
@@ -238,19 +241,21 @@ class cmhelper {
             throw new Exception("First param array must have an 'id' key and 'class' key.");
         }
 
-        preg_match('/highlight-([^ ]*)/', $aTextarea['class'], $aMatches);
+        preg_match('/highlight-([^ ]*)/', (string) ($aTextarea['class']??''), $aMatches);
         $sMode=$aMatches[1]??false;
         if(!$sMode){
             throw new Exception("First param array must have an 'class' with a class named 'highlight-<mode>'.");
         }
 
-        $this->addEditor($sMode, $aTextarea['id'], $aMoreOptions);
-        $value=$aTextarea['value']??'';
+        $this->addEditor($sMode, (string) ($aTextarea['id']??''), $aMoreOptions);
+        $value=(string) ($aTextarea['value']??'');
         unset($aTextarea['value']);
 
-        $sReturn='<textarea '.implode(' ', array_map(function($sKey, $sValue){
-            return "$sKey=\"$sValue\"";
-        }, array_keys($aTextarea), array_values($aTextarea))).'>'.$value.'</textarea>';
+        $sAtttr='';
+        foreach($aTextarea as $sKey=>$sVal){
+            $sAtttr.="$sKey=\"$sVal\" ";
+        }
+        $sReturn="<textarea $sAtttr>$value</textarea>";
 
         return $sReturn;
     }
@@ -266,7 +271,8 @@ class cmhelper {
     protected function _addMode(string $sMode): void
     {
         if($this->_aAvailableShModes[$sMode]??false){
-            foreach($this->_aAvailableShModes[$sMode]['load'] as $sJsfile){
+            $aLoad=(array) ($this->_aAvailableShModes[$sMode]['load']??[]);
+            foreach($aLoad as $sJsfile){
                 if(!($this->_aModes2Load[$sJsfile]??false)){
                     $this->_aModes2Load[$sJsfile]=true;
                     $this->_sHtmlHead.="<script src=\"$this->_sCmbaseUrl/mode/$sJsfile/$sJsfile.js\"></script>";                        
@@ -312,12 +318,12 @@ class cmhelper {
             if(!in_array($sTheme, $this->_aAvailableThemes)){
                 echo "⚠️ ". __CLASS__." - WARNING: Unknown theme '<strong>$sTheme</strong>'<br>
                     Known themes are: "
-                    . implode(", ", array_values($this->_aAvailableThemes))
+                    . implode(", ", array_map('strval', $this->_aAvailableThemes))
                     ."<br>"
                     ;
                 $sTheme=false;
             }
-            if(!($this->_aThemes2Load[$sTheme]??false)){
+            if($sTheme && !($this->_aThemes2Load[$sTheme] ?? false)){
                 $this->_aThemes2Load[$sTheme]=true;
                 $this->_sHtmlHead.="<link rel=\"stylesheet\" href=\"$this->_sCmbaseUrl/theme/$sTheme.min.css\">";
             }

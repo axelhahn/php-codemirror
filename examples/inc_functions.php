@@ -1,33 +1,36 @@
 <?php
 
+declare(strict_types=1);
 
 /**
  * Get html code of executed html code
  * 
- * @param object $codemirror
+ * @param cmhelper $codemirror
  * @param string $sPhpcode
  * @return string
  */
-function getOutput(&$codemirror, string $sPhpcode): string{
+function getOutput(cmhelper &$codemirror, string $sPhpcode): string{
     $sOut = '';
 
     eval("\$sOut=$sPhpcode;");
     return $sOut;
 }
 
-
-function showCode(&$codemirror, string $sCode, string $sVal): string
+/**
+ * Show a code snippet with source code and output
+ * @param cmhelper $codemirror cmhelper instance
+ * @param string $sCode      code to render in codemirror textarea
+ * @param string $sVal       code snippet to highlight
+ * @return string
+ */
+function showCode(cmhelper &$codemirror, string $sCode, string $sVal): string
 {
     $id="snippet".uniqid();
-    if(!$codemirror) {
-        die("codemirror not known");
-    }
-    $sSourcecode = 
-        $codemirror->addTextarea(
+    $sSourcecode = (string) $codemirror->addTextarea(
             [
                 'id' => $id,
                 'class' => 'highlight-php',
-                'value' => "<?php \n". $sCode
+                'value' => "<?php \n$sCode"
             ],
             [
                 'theme' => null,

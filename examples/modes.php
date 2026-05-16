@@ -27,10 +27,17 @@ include "inc_functions.php";
 $sModes='<table><tr><th>Mode</th><th>Loaded languages</th><th>Mimetype</th></tr>';
 foreach($codemirror->getModes(true) as $sMode=>$aOptions){
     // $sModes.="<strong>$sMode</strong> - ".print_r($aOptions, true)."<br>";
+
+    if (!is_array($aOptions)) {
+        $aOptions = [];
+    }
+    $aOptions['load'] = $aOptions['load'] ?? [];
+    $aOptions['mode'] = $aOptions['mode'] ?? '';
+    
     $sModes.="<tr>
         <td><strong>$sMode</strong></td>
-        <td>".implode(", ", $aOptions['load']??[])."</td>
-        <td>".($aOptions['mode']??'')."</td>
+        <td>".implode(", ", $aOptions['load'])."</td>
+        <td>".(string) $aOptions['mode']."</td>
     </tr>";
 }
 $sModes.='</table>';

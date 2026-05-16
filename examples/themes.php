@@ -53,12 +53,12 @@ $aDemos=[
 // generate content
 // ----------------------------------------------------------------------
 
-$sThemeParam=preg_replace('/[^a-zA-Z0-9\-]/', '', $_GET['theme']??'');
+$sThemeParam=preg_replace('/[^a-zA-Z0-9\-]/', '', (string) ($_GET['theme']??''));
 
 $sThemeoptions='';
 $sThemeoptions.="<option value=\"\">default</option>";
 foreach($codemirror->getThemes() as $sTheme){
-    $sThemeoptions.="<option value=\"$sTheme\" ".(($sThemeParam??'')==$sTheme?'selected="selected"':'').">$sTheme</option>";
+    $sThemeoptions.="<option value=\"$sTheme\" ".(($sThemeParam??'')===$sTheme?'selected="selected"':'').">$sTheme</option>";
 }
 
 foreach($aDemos as $aDemo){
