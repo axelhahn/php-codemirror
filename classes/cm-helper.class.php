@@ -149,6 +149,7 @@ class cmhelper {
      *                              - lineNumbers     bool    show line numbers; default: false
      *                              - lineWrapping    bool    wrap long lines; default: false
      *                              - matchBrackets   bool    highlight matching brackets; default: true
+     *                              - height          string  css value for height
      * @return bool
      */
     public function addEditor(string $sMode, string $sFormid='', array $aMoreOptions=[]):bool
@@ -176,6 +177,15 @@ class cmhelper {
         }
         // see https://codemirror.net/3/doc/manual.html for options
         $sObjName='CodeMorrorEditor'.$iCmCounter;
+        if( $aMoreOptions['height']!==null ){
+            $sCss='
+            <style>
+                #'.$sFormid.' + div {height: '.$aMoreOptions['height'].'; }
+            </style>';
+            if(!strstr($this->_sHtmlHead, $sCss)){
+                $this->_sHtmlHead.=$sCss;
+            }
+        }
         $this->_sJS.='
             <script>
                 onVisible(document.querySelector("#'.$sFormid.'"), 

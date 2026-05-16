@@ -64,6 +64,7 @@ The options define the behavior of the editor. Currently only the following opti
 | `lineNumbers`   | bool   | show line numbers; default: false
 | `lineWrapping`  | bool   | wrap long lines; default: false
 | `matchBrackets` | bool   | highlight matching brackets; default: true
+| `height`        | string | css value for height; default: "300px" (from codemirror.css)
 
 ### Apply codemirror - addEditor()
 
