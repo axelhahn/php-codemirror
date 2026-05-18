@@ -73,8 +73,9 @@ function showPage(string $sHeader, string $sBody): void
 
         <footer>
             👤 Author: Axel Hahn<br>
-            📄 Source: <a href="https://github.com/axelhahn/php-codemirror">https://github.com/axelhahn/php-codemirror</a><br>
+            📄 Source: <a href="https://github.com/axelhahn/php-codemirror" target="_blank">https://github.com/axelhahn/php-codemirror</a><br>
             📜 License: GNU GPL 3.0<br>
+            📗 Docs: <a href="https://www.axel-hahn.de/docs/php-codemirror" target="_blank">https://www.axel-hahn.de/docs/php-codemirror</a><br>
         </footer>
 
     </body>
