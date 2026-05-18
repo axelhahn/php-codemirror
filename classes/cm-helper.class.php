@@ -14,7 +14,7 @@ declare(strict_types=1);
  * ----------------------------------------------------------------------
  * 2025-11-16  v0.1  <axel>  initial version
  * 2026-04-17  v0.2  <axel>  allow multiple instances
- * 2026-05-16  v0.3  <axel>  __lastModified__
+ * 2026-05-18  v0.3  <axel>  __lastModified__
  */
 
 class cmhelper {
@@ -171,13 +171,13 @@ class cmhelper {
 
         $iCmCounter++;
 
-        if ($aMoreOptions['readonly']!==null){
+        if (isset($aMoreOptions['readonly'])){
             echo "⚠️ ". __METHOD__." - WARNING: Rewrite option with camelcase '<strong>readOnly</strong>' (instead of 'readonly')<br>";
 
         }
         // see https://codemirror.net/3/doc/manual.html for options
         $sObjName='CodeMorrorEditor'.$iCmCounter;
-        if( $aMoreOptions['height']!==null ){
+        if( isset($aMoreOptions['height']) ){
             $sCss='
             <style>
                 #'.$sFormid.' + div {height: '.$aMoreOptions['height'].'; }
