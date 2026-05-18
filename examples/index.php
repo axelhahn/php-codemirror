@@ -1,6 +1,9 @@
 <?php
 
 declare(strict_types=1);
+ini_set('display_errors', '1');
+error_reporting(E_ALL);
+
 include "inc_functions.php";
 
 // ----------------------------------------------------------------------
@@ -28,7 +31,7 @@ showPage(
             Yep, no problem.<br>
             <br>
             And we want to use multiple instances on your page. You can mix different themes and syntax highlighters as well.<br>
-            <a class=\"btn\" href=\"multiple-instances.php\">Show me</a>
+            <a class=\"btn\" href=\"multiple-instances.php\">▶️ Show me</a>
         </p>
         </blockquote>
 
@@ -36,7 +39,7 @@ showPage(
         <blockquote>
         <p>
             Codemirror has several themes you can select from.<br>
-            <a class=\"btn\" href=\"themes.php\">Try the themes</a>
+            <a class=\"btn\" href=\"themes.php\">🎨 Try the themes</a>
         </p>
         </blockquote>
 
@@ -44,7 +47,7 @@ showPage(
         <blockquote>
         <p>
             A few syntax highlight modes were added<br>
-            <a class=\"btn\" href=\"modes.php\">See the modes</a>
+            <a class=\"btn\" href=\"modes.php\">🗂️ See the modes</a>
         </p>
         </blockquote>
     "

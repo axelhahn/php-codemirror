@@ -85,6 +85,7 @@ foreach($aDemos as $aDemo){
             ."  [\n"
             ."    'theme' => ".(($aDemo['theme']??null) ? "'$aDemo[theme]'" : "null") .",\n"
             ."    'readOnly' => true,\n"
+            ."    'height' => '300px',\n"
             ."  ],\n"
             .");\n",
             $aDemo['content']
@@ -102,7 +103,7 @@ showPage(
     , 
     "
         <h1>Demo :: Multiple instances</h1>
-        <a class=\"btn\" href=\"index.php\">&laquo; back</a><br>
+        <a class=\"btn\" href=\"index.php\">⬅️ back</a><br>
         <p>
             This demo embeds multiple textareas with syntax highlighting for different languages.<br>
             By adding Codemirror to the page, the content of the textarea is highlighted.<br>

@@ -55,12 +55,6 @@ function showCode(cmhelper &$codemirror, string $sCode, string $sVal): string
 
 function showPage(string $sHeader, string $sBody): void 
 {
-    if(strstr($_SERVER['REQUEST_URI'], 'index.php')) {
-        $nav="";
-    } else {
-        $nav="<a class=\"btn\" href=\"index.php\">&laquo; back</a>";
-    }
-    $toHome="<a class=\"btn\" href=\"index.php\">&laquo; back</a><br>";
     echo <<<HTML
 <!DOCTYPE html>
 <html>

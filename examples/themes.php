@@ -54,11 +54,23 @@ $aDemos=[
 // ----------------------------------------------------------------------
 
 $sThemeParam=preg_replace('/[^a-zA-Z0-9\-]/', '', (string) ($_GET['theme']??''));
+$sThemeParam=$sThemeParam ? $sThemeParam : "default";
+
+$sPrevTheme=array_last($codemirror->getThemes());
+$sCurrentTheme='';
+$sNextTheme='';
 
 $sThemeoptions='';
-$sThemeoptions.="<option value=\"\">default</option>";
-foreach($codemirror->getThemes() as $sTheme){
-    $sThemeoptions.="<option value=\"$sTheme\" ".(($sThemeParam??'')===$sTheme?'selected="selected"':'').">$sTheme</option>";
+foreach(array_merge(['default'], $codemirror->getThemes()) as $sTheme){
+    $bSelected=false;
+    if(($sThemeParam??'')===$sTheme ) {
+        $bSelected=true;
+        $sCurrentTheme = $sThemeParam;
+    }
+    $sPrevTheme=$sCurrentTheme ? $sPrevTheme : $sTheme;
+    $sNextTheme=($sCurrentTheme && !$bSelected && !$sNextTheme) ? $sTheme : $sNextTheme;
+
+    $sThemeoptions.="<option value=\"$sTheme\" ".($bSelected?'selected="selected"':'').">$sTheme</option>";
 }
 
 foreach($aDemos as $aDemo){
@@ -69,14 +81,18 @@ foreach($aDemos as $aDemo){
         <h2>Themes with an example of "'.$aDemo['language'].'"</h2>
         <p>'
             .$aDemo['info'].'<br>
-            The selected theme is <strong>'.$sThemeParam.'</strong><br>
+            The selected theme is <strong>"'.$sThemeParam.'"</strong><br>
         </p>
 
         <form method="GET" action="?">
             Select a theme:<br>
-            <select name="theme" onchange="this.form.submit();" size="10">
+            <br>
+            <select name="theme" onchange="this.form.submit();" size="10" style="float: left;;">
                 '.$sThemeoptions.'
             </select>
+            <a class="btn" href="?theme='.$sPrevTheme.'"> 🔼 '.$sPrevTheme.'</a> <br>
+            <a class="btn" href="?theme='.$sNextTheme.'"> 🔽 '.$sNextTheme.'</a>
+            <div style="clear: both;"></div>
         </form>
         <br>
 
@@ -113,7 +129,7 @@ showPage(
     , 
     "
         <h1>Demo :: Themes</h1>
-        <a class=\"btn\" href=\"index.php\">&laquo; back</a><br>
+        <a class=\"btn\" href=\"index.php\">⬅️ back</a><br>
         <p>
             This demo embeds multiple textareas with different languages.<br>
             By adding Codemirror to the page, the content of the textarea is highlighted.<br>

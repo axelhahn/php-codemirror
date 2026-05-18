@@ -78,7 +78,7 @@ showPage(
     , 
     "
         <h1>Demo :: Modes</h1>
-        <a class=\"btn\" href=\"index.php\">&laquo; back</a><br>
+        <a class=\"btn\" href=\"index.php\">⬅️ back</a><br>
         <p>
             A mode value describes the type of a file that a syntax highlight can be applied.<br>
             You need to set a class named 'higlight-<strong>&lt;mode></strong>' on the textarea (other classes you can apply a well).<br>
