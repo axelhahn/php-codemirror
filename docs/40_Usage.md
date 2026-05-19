@@ -107,14 +107,14 @@ require_once '[webroot]/vendor/php-codemirror/classes/cm-helper.class.php';
 $codemirror=new cmhelper();
 
 $htmlbody=$codemirror->addTextarea(
-            [
-                'class' => 'highlight-htmlmixed',
-                'value' => '<your sourcecode to highlight>',
-            ],
-            [
-                'readOnly' => true,
-            ]
-        );
+    [
+        'class' => 'highlight-htmlmixed',
+        'value' => '<your sourcecode to highlight>',
+    ],
+    [
+        'readOnly' => true,
+    ]
+);
 
 $sCmHead=$codemirror->getHtmlHead();
 $sCmJs=$codemirror->getJs();

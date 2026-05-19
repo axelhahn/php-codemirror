@@ -18,9 +18,7 @@ It is a work in progress. Only a basic subset of Codemirror features is supporte
 📗 Docs: see <https://www.axel-hahn.de/docs/php-codemirror/>
 
 
-## Screenshots
-
-![alt text](docs/images/screenshot_demo_lang.png)
+## Screenshot
 
 ![alt text](docs/images/screenshot_demo_theme.png)
 

@@ -10,6 +10,4 @@ This project of an PHP class was initialized to simplify the creation of a CodeM
 
 These are screenshots of the included demo:
 
-![alt text](images/screenshot_demo_lang.png)
-
 ![alt text](images/screenshot_demo_theme.png)
