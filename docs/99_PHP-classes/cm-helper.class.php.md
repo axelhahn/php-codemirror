@@ -18,7 +18,7 @@ generator: Axels php-classdoc; https://github.com/axelhahn/php-classdoc
  ----------------------------------------------------------------------
  2025-11-16  v0.1  <axel>  initial version
  2026-04-17  v0.2  <axel>  allow multiple instances
- 2026-05-01  v0.3  <axel>  __lastModified__
+ 2026-05-18  v0.3  <axel>  __lastModified__
 
 ```
 
@@ -83,7 +83,7 @@ Add an editor with its own syntax highlighting for a textarea.
  - $o->getJs()
  ... to apply the editor settings in the html document
 
-Line [154](https://github.com/axelhahn/php-codemirror/tree/main/classes/cm-helper.class.php#L154) (45 lines)
+Line [155](https://github.com/axelhahn/php-codemirror/tree/main/classes/cm-helper.class.php#L155) (56 lines)
 
 **Return**: `bool`
 
@@ -102,6 +102,7 @@ Line [154](https://github.com/axelhahn/php-codemirror/tree/main/classes/cm-helpe
                               - lineNumbers     bool    show line numbers; default: false
                               - lineWrapping    bool    wrap long lines; default: false
                               - matchBrackets   bool    highlight matching brackets; default: true
+                              - height          string  css value for height
 
 ### 🔹 public addTextarea()
 
@@ -114,7 +115,7 @@ Add an editor with its own syntax highlighting for a textarea.
  - $o->getJs()
  ... to apply the editor settings in the html document
 
-Line [228](https://github.com/axelhahn/php-codemirror/tree/main/classes/cm-helper.class.php#L228) (29 lines)
+Line [241](https://github.com/axelhahn/php-codemirror/tree/main/classes/cm-helper.class.php#L241) (31 lines)
 
 **Return**: `string`
 
@@ -138,12 +139,13 @@ Line [228](https://github.com/axelhahn/php-codemirror/tree/main/classes/cm-helpe
                               - lineNumbers     bool    show line numbers; default: false
                               - lineWrapping    bool    wrap long lines; default: false
                               - matchBrackets   bool    highlight matching brackets; default: true
+                              - height          string  TODO css value for height
 
 ### 🔹 public getModes()
 
 Get a list of supported syntax highlight modes
 
-Line [336](https://github.com/axelhahn/php-codemirror/tree/main/classes/cm-helper.class.php#L336) (7 lines)
+Line [352](https://github.com/axelhahn/php-codemirror/tree/main/classes/cm-helper.class.php#L352) (7 lines)
 
 **Return**: `array`
 
@@ -157,7 +159,7 @@ Line [336](https://github.com/axelhahn/php-codemirror/tree/main/classes/cm-helpe
 
 Get a list of known themes
 
-Line [348](https://github.com/axelhahn/php-codemirror/tree/main/classes/cm-helper.class.php#L348) (4 lines)
+Line [364](https://github.com/axelhahn/php-codemirror/tree/main/classes/cm-helper.class.php#L364) (4 lines)
 
 **Return**: `array`
 
@@ -167,7 +169,7 @@ Line [348](https://github.com/axelhahn/php-codemirror/tree/main/classes/cm-helpe
 
 Get html code for html head lines
 
-Line [359](https://github.com/axelhahn/php-codemirror/tree/main/classes/cm-helper.class.php#L359) (4 lines)
+Line [375](https://github.com/axelhahn/php-codemirror/tree/main/classes/cm-helper.class.php#L375) (4 lines)
 
 **Return**: `string`
 
@@ -177,7 +179,7 @@ Line [359](https://github.com/axelhahn/php-codemirror/tree/main/classes/cm-helpe
 
 Get html code for javascript code for bottom of html page
 
-Line [368](https://github.com/axelhahn/php-codemirror/tree/main/classes/cm-helper.class.php#L368) (4 lines)
+Line [384](https://github.com/axelhahn/php-codemirror/tree/main/classes/cm-helper.class.php#L384) (4 lines)
 
 **Return**: `string`
 
