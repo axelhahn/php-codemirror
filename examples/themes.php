@@ -56,7 +56,7 @@ $aDemos=[
 $sThemeParam=preg_replace('/[^a-zA-Z0-9\-]/', '', (string) ($_GET['theme']??''));
 $sThemeParam=$sThemeParam ? $sThemeParam : "default";
 
-$sPrevTheme=array_last($codemirror->getThemes());
+$sPrevTheme=(string) array_last($codemirror->getThemes());
 $sCurrentTheme='';
 $sNextTheme='';
 
@@ -67,8 +67,8 @@ foreach(array_merge(['default'], $codemirror->getThemes()) as $sTheme){
         $bSelected=true;
         $sCurrentTheme = $sThemeParam;
     }
-    $sPrevTheme=$sCurrentTheme ? $sPrevTheme : $sTheme;
-    $sNextTheme=($sCurrentTheme && !$bSelected && !$sNextTheme) ? $sTheme : $sNextTheme;
+    $sPrevTheme=$sCurrentTheme ? $sPrevTheme : (string) $sTheme;
+    $sNextTheme=($sCurrentTheme && !$bSelected && !$sNextTheme) ? (string) $sTheme : $sNextTheme;
 
     $sThemeoptions.="<option value=\"$sTheme\" ".($bSelected?'selected="selected"':'').">$sTheme</option>";
 }
@@ -90,8 +90,8 @@ foreach($aDemos as $aDemo){
             <select name="theme" onchange="this.form.submit();" size="10" style="float: left;;">
                 '.$sThemeoptions.'
             </select>
-            <a class="btn" href="?theme='.$sPrevTheme.'"> 🔼 '.$sPrevTheme.'</a> <br>
-            <a class="btn" href="?theme='.$sNextTheme.'"> 🔽 '.$sNextTheme.'</a>
+            <a class="btn btn-theme" href="?theme='.$sPrevTheme.'"> 🔼 '.$sPrevTheme.'</a> <br>
+            <a class="btn btn-theme" href="?theme='.$sNextTheme.'"> 🔽 '.$sNextTheme.'</a>
             <div style="clear: both;"></div>
         </form>
         <br>

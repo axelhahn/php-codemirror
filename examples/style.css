@@ -30,10 +30,11 @@ h3::before{content: '> ';}
 
 hr{border: none; border-bottom: 2px dotted #fffa;}
 option::active{background: #0001;}
-select{ border: 2px solid #0003; border-radius: 1em; padding: 0.5em; }
+select{ border: 2px solid #0003; border-radius: 1em; padding: 0.5em; margin-right: 2em;}
 table{width: 100%;}
 th{background: #0001; text-align: left;}
 .snippet td{width: 49%;}
 
 a.btn {background: #fff5; border: 2px solid #fff; color: #333; border-radius: 0.5em; padding: 0.3em 1em; display: inline-block; text-decoration: none;}
 a.btn:hover {background: #ffff; }
+a.btn-theme {width: 14em;}
