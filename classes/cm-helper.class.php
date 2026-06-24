@@ -5,7 +5,7 @@ declare(strict_types=1);
 /**
  * ----------------------------------------------------------------------
  * 
- * HELPER CLASS for syntax highlighting with codemiror
+ * HELPER CLASS for syntax highlighting with codemirror
  * 
  * @author Axel Hahn
  * @link https://github.com/axelhahn/php-codemirror
@@ -14,7 +14,7 @@ declare(strict_types=1);
  * ----------------------------------------------------------------------
  * 2025-11-16  v0.1  <axel>  initial version
  * 2026-04-17  v0.2  <axel>  allow multiple instances
- * 2026-05-18  v0.3  <axel>  __lastModified__
+ * 2026-06-24  v0.3  <axel>  __lastModified__
  */
 
 class cmhelper {
@@ -94,7 +94,7 @@ class cmhelper {
     public function setBase(string $sNewbase=''): void
     {
         $this->_sCmbaseUrl=$sNewbase ?? $this->_sCmbaseUrl;
-        $this->_sHtmlHead.='
+        $this->_sHtmlHead='
             <!-- codemirror -->
             <link rel="stylesheet" href="'.$this->_sCmbaseUrl.'/codemirror.min.css">
             <script src="'.$this->_sCmbaseUrl.'/codemirror.min.js"></script>
@@ -171,16 +171,16 @@ class cmhelper {
 
         $iCmCounter++;
 
-        if (isset($aMoreOptions['readonly'])){
+        if ($aMoreOptions['readonly'] ?? false) {
             echo "⚠️ ". __METHOD__." - WARNING: Rewrite option with camelcase '<strong>readOnly</strong>' (instead of 'readonly')<br>";
 
         }
         // see https://codemirror.net/3/doc/manual.html for options
-        $sObjName='CodeMorrorEditor'.$iCmCounter;
-        if( isset($aMoreOptions['height']) ){
+        $sObjName="CodeMorrorEditor$iCmCounter";
+        if($aMoreOptions['height'] ?? false){
             $sCss='
             <style>
-                #'.$sFormid.' + div {height: '.$aMoreOptions['height'].'; }
+                #'.$sFormid.' + div {height: '.(string) $aMoreOptions['height'].'; }
             </style>';
             if(!strstr($this->_sHtmlHead, $sCss)){
                 $this->_sHtmlHead.=$sCss;
@@ -254,7 +254,7 @@ class cmhelper {
         preg_match('/highlight-([^ ]*)/', (string) ($aTextarea['class']??''), $aMatches);
         $sMode=$aMatches[1]??false;
         if(!$sMode){
-            throw new Exception("First param array must have an 'class' with a class named 'highlight-<mode>'.");
+            throw new Exception("First param array must have a key 'class' with a class named 'highlight-<mode>'.");
         }
 
         $this->addEditor($sMode, (string) ($aTextarea['id']??''), $aMoreOptions);
@@ -296,21 +296,6 @@ class cmhelper {
                 ;
             $sMode="text";
         }
-
-        # TODO: put it into a config
-        if($sMode=='htmlmixed'){
-            $this->_sJS.='
-                <script>
-                    var mixedMode = {
-                        name: "htmlmixed",
-                        scriptTypes: [{matches: /\/x-handlebars-template|\/x-mustache/i,
-                                    mode: null},
-                                    {matches: /(text|application)\/(x-)?vb(a|script)/i,
-                                    mode: "vbscript"}]
-                    };
-                </script>                
-            ';
-        }
     }
 
     /**
@@ -325,7 +310,7 @@ class cmhelper {
     {
 
         if($sTheme && $sTheme!=="default"){
-            if(!in_array($sTheme, $this->_aAvailableThemes)){
+            if(!in_array($sTheme, $this->_aAvailableThemes, true)){
                 echo "⚠️ ". __CLASS__." - WARNING: Unknown theme '<strong>$sTheme</strong>'<br>
                     Known themes are: "
                     . implode(", ", array_map('strval', $this->_aAvailableThemes))

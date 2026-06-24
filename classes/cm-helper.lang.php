@@ -45,6 +45,8 @@ return [
         'shell'=>     ['load'=>['shell'], 'mode'=> "text/x-sh"], // text/x-sh, application/x-sh
         'sql'=>       ['load'=>['shell'], 'mode'=> "text/x-sql"],
 
+        'xml'=>       ['load'=>['xml'],  'mode'=> "application/xml"],
+
         'yaml'=>      ['load'=>['yaml'],  'mode'=> "text/x-yaml"],
 
 ];

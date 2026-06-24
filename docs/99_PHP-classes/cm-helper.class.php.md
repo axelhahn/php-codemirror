@@ -9,7 +9,7 @@ generator: Axels php-classdoc; https://github.com/axelhahn/php-classdoc
 
  ----------------------------------------------------------------------
 
- HELPER CLASS for syntax highlighting with codemiror
+ HELPER CLASS for syntax highlighting with codemirror
 
  @author Axel Hahn
  @link https://github.com/axelhahn/php-codemirror
@@ -18,7 +18,7 @@ generator: Axels php-classdoc; https://github.com/axelhahn/php-classdoc
  ----------------------------------------------------------------------
  2025-11-16  v0.1  <axel>  initial version
  2026-04-17  v0.2  <axel>  allow multiple instances
- 2026-05-18  v0.3  <axel>  __lastModified__
+ 2026-06-24  v0.3  <axel>  __lastModified__
 
 ```
 
@@ -145,7 +145,7 @@ Line [241](https://github.com/axelhahn/php-codemirror/tree/main/classes/cm-helpe
 
 Get a list of supported syntax highlight modes
 
-Line [352](https://github.com/axelhahn/php-codemirror/tree/main/classes/cm-helper.class.php#L352) (7 lines)
+Line [337](https://github.com/axelhahn/php-codemirror/tree/main/classes/cm-helper.class.php#L337) (7 lines)
 
 **Return**: `array`
 
@@ -159,7 +159,7 @@ Line [352](https://github.com/axelhahn/php-codemirror/tree/main/classes/cm-helpe
 
 Get a list of known themes
 
-Line [364](https://github.com/axelhahn/php-codemirror/tree/main/classes/cm-helper.class.php#L364) (4 lines)
+Line [349](https://github.com/axelhahn/php-codemirror/tree/main/classes/cm-helper.class.php#L349) (4 lines)
 
 **Return**: `array`
 
@@ -169,7 +169,7 @@ Line [364](https://github.com/axelhahn/php-codemirror/tree/main/classes/cm-helpe
 
 Get html code for html head lines
 
-Line [375](https://github.com/axelhahn/php-codemirror/tree/main/classes/cm-helper.class.php#L375) (4 lines)
+Line [360](https://github.com/axelhahn/php-codemirror/tree/main/classes/cm-helper.class.php#L360) (4 lines)
 
 **Return**: `string`
 
@@ -179,7 +179,7 @@ Line [375](https://github.com/axelhahn/php-codemirror/tree/main/classes/cm-helpe
 
 Get html code for javascript code for bottom of html page
 
-Line [384](https://github.com/axelhahn/php-codemirror/tree/main/classes/cm-helper.class.php#L384) (4 lines)
+Line [369](https://github.com/axelhahn/php-codemirror/tree/main/classes/cm-helper.class.php#L369) (4 lines)
 
 **Return**: `string`
 
